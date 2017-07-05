@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nab.posprototype.component.repository.ProductRepository;
+import com.nab.posprototype.dto.ProductDTO;
 import com.nab.posprototype.model.Product;
 
 @Service
@@ -18,12 +19,9 @@ public class ProductService {
 	@Qualifier("productRepositoryHbn")
 	ProductRepository repository;
 
-	// esta bien enviar los parametros de esta forma,desde controller a service ?
-	// o recibir un objeto product en service ?
-	// !
-	public Integer persist(String code, String desc) {
+	public Integer add(ProductDTO productDTO) {
 		try {
-			Product productIn = repository.persist(new Product(code, desc));
+			Product productIn = repository.persist(new Product(productDTO.getCode(), productDTO.getDescription()));
 			return productIn.getId();
 		} catch (Exception e) {
 			e.printStackTrace();
