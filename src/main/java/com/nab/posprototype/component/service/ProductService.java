@@ -1,5 +1,7 @@
 package com.nab.posprototype.component.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -24,10 +26,17 @@ public class ProductService {
 			Product productIn = repository.persist(new Product(code, desc));
 			return productIn.getId();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		}
+	}
+
+	public List<Product> list() {
+		return repository.list();
+	}
+
+	public Product getByKey(Integer id) {
+		return repository.getByKey(id);
 	}
 
 }
