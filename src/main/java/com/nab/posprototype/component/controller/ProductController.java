@@ -23,7 +23,7 @@ public class ProductController {
 	@Autowired
 	ProductService service;
 
-	@RequestMapping(value = "/add.do", method = RequestMethod.POST, 
+	@RequestMapping(value = "/add", method = RequestMethod.POST, 
 			consumes = "application/json", produces = "application/json")
 	public ResponseEntity<String> add(@RequestBody(required = true) ProductDTO productDTO) {
 		ResponseEntity<String> response;
@@ -54,13 +54,13 @@ public class ProductController {
 		return response;
 	}
 
-	@RequestMapping(value = "/list.do", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Product> list() {
 		return service.list();
 	}
 
-	@RequestMapping(value = "/get.do/{id}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(value = HttpStatus.OK)
 	public Product getByKey(@PathVariable Integer id) {
 		return service.getByKey(id);
