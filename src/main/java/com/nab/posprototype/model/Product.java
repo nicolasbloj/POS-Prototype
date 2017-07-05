@@ -1,11 +1,29 @@
 package com.nab.posprototype.model;
 
-public class Product {
+import static javax.persistence.GenerationType.IDENTITY;
 
-	private long id;
-	private String code;
-	private String description;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PRODUCTO")
+public class Product implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+    @GeneratedValue(strategy = IDENTITY)
+	private Integer id;
+	@Column(name = "codigo")
+	private String code;
+	@Column(name = "descripcion")
+	private String description;
+
 	public Product() {
 		super();
 	}
@@ -16,7 +34,7 @@ public class Product {
 		this.description = description;
 	}
 
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -28,8 +46,4 @@ public class Product {
 		return description;
 	}
 
-	
-	
-	
-	
 }
