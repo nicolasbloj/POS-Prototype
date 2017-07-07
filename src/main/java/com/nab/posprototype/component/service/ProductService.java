@@ -1,5 +1,6 @@
 package com.nab.posprototype.component.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,30 @@ public class ProductService {
 		}
 	}
 
-	public List<Product> list() {
-		return repository.list();
+	public List<ProductDTO> list() {
+		List<Product> products = repository.list();
+		List<ProductDTO> productsDTO = new ArrayList<>();
+		/*
+		 * for(int i=0;i<products.size();i++) { productsDTO.add(new
+		 * ProductDTO(products.get(i).getCode(),products.get(i).getDescription())); }
+		 */
+		// Prog. Funcional 
+		products.forEach((final Product product) -> productsDTO
+				.add(new ProductDTO(product.getCode(), product.getDescription())));
+
+		return productsDTO;
 	}
 
-	public Product getByKey(Integer id) {
-		return repository.getByKey(id);
+	public ProductDTO getByKey(Integer id) {
+		Product product = repository.getByKey(id);
+		try {
+			return new ProductDTO(product.getCode(), product.getDescription());
+			// Deberiamos tener nuestras propias clases que manejen las exceptions...
+		} catch (NullPointerException e) {
+			// logging...
+			return null;
+		}
+
 	}
 
 }
