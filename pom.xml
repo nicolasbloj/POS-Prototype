@@ -35,8 +35,8 @@
 		<c3p0.version>0.9.1.2</c3p0.version>
 		<!--log4j.version>1.2.17</log4j.version -->
 		<postgres.driver.version>9.4.1212</postgres.driver.version>
-		
-		 <springsecurity.version>4.0.4.RELEASE</springsecurity.version>
+
+		<springsecurity.version>4.0.4.RELEASE</springsecurity.version>
 	</properties>
 
 	<dependencies>
@@ -52,8 +52,8 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-		
+
+
 		<!-- ===================================== JACKSON ===================================== -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -89,26 +89,23 @@
 		</dependency>
 
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-            
-        <!-- Spring Security -->
-        <!--dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${springsecurity.version}</version>
-        </dependency-->
-        
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Spring Security -->
+		<!--dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
+			<version>${springsecurity.version}</version> </dependency -->
+
 		<!-- ===================================== HIBERNATE ===================================== -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -117,25 +114,15 @@
 			<!--scope>compile</scope -->
 		</dependency>
 
- 	<!-- jsr303 validation -->
-        <!--dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-java8</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency-->
+		<!-- jsr303 validation -->
+		<!--dependency> <groupId>javax.validation</groupId> <artifactId>validation-api</artifactId> 
+			<version>1.1.0.Final</version> </dependency> <dependency> <groupId>org.hibernate</groupId> 
+			<artifactId>hibernate-validator</artifactId> <version>${hibernate.version}</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-java8</artifactId> 
+			<version>${hibernate.version}</version> </dependency -->
 
 		<!-- ===================================== POOLING ===================================== -->
-		
+
 		<!-- connection pooling with c3p0 -->
 		<dependency>
 			<groupId>c3p0</groupId>
@@ -152,6 +139,14 @@
 			<version>${postgres.driver.version}</version>
 		</dependency>
 
+		<!-- ======================================= LOGGING ====================================== -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>runtime</scope>
+		</dependency>
+		
 	</dependencies>
 
 
