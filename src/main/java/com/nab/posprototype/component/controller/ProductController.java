@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nab.posprototype.component.service.ProductService;
 import com.nab.posprototype.dto.ProductDTO;
-import com.nab.posprototype.model.Product;
 
 @RestController
 @RequestMapping("/product")
@@ -23,32 +22,23 @@ public class ProductController {
 	@Autowired
 	ProductService service;
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST, 
-			consumes = "application/json", produces = "application/json")
+	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<String> add(@RequestBody(required = true) ProductDTO productDTO) {
 		ResponseEntity<String> response;
 		try {
 			Integer id = service.add(productDTO);
 			if (id == -1)
-				response = new ResponseEntity<String>(
-						"No se pudo insertar el producto " + productDTO.getCode(),
-						HttpStatus.INTERNAL_SERVER_ERROR
-						);
+				response = new ResponseEntity<String>("No se pudo insertar el producto " + productDTO.getCode(),
+						HttpStatus.INTERNAL_SERVER_ERROR);
+			// Centralizar mensajes de errores en alguna interface con variables publicas
+			// estaticas.
 
-			response = new ResponseEntity<String>(
-					new StringBuilder().append("El producto ")
-					.append(id)
-					.append(" fue correctamente insertado")
-					.toString(),
-					HttpStatus.OK
-					);
+			response = new ResponseEntity<>(new StringBuilder().append("El producto ").append(id)
+					.append(" fue correctamente insertado").toString(), HttpStatus.OK);
 
-			
 		} catch (Exception e) {
-			response = new ResponseEntity<String>(
-					"An error happens while trying to add the product " + productDTO.getCode(),
-					HttpStatus.INTERNAL_SERVER_ERROR
-					);
+			response = new ResponseEntity<>("An error happens while trying to add the product " + productDTO.getCode(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		return response;
@@ -56,13 +46,23 @@ public class ProductController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(value = HttpStatus.OK)
-	public List<Product> list() {
-		return service.list();
+	public ResponseEntity<List<ProductDTO>> list() {
+		
+		List<ProductDTO> productsDTO = service.list();
+		return new ResponseEntity<>(productsDTO, HttpStatus.OK);
+		
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(value = HttpStatus.OK)
-	public Product getByKey(@PathVariable Integer id) {
-		return service.getByKey(id);
+	public ResponseEntity<ProductDTO> getByKey(@PathVariable Integer id) {
+		
+		ProductDTO productDTO = service.getByKey(id);
+		HttpStatus httpStatus = HttpStatus.OK;
+		if (productDTO == null)
+			httpStatus = HttpStatus.NOT_FOUND;
+		return new ResponseEntity<>(productDTO, httpStatus);
+		
 	}
+
 }
