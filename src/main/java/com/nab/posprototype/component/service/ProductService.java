@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nab.posprototype.component.repository.ProductRepository;
 import com.nab.posprototype.dto.ProductDTO;
+import com.nab.posprototype.dto.converter.ProductConverter;
 import com.nab.posprototype.model.Product;
 
 @Service
@@ -22,8 +23,7 @@ public class ProductService {
 
   public Integer add(ProductDTO productDTO) {
     try {
-      Product productIn =
-          repository.persist(new Product(productDTO.getCode(), productDTO.getDescription()));
+      Product productIn = repository.persist(ProductConverter.convertDTO(productDTO));
       return productIn.getId();
     } catch (Exception e) {
       e.printStackTrace();
@@ -35,8 +35,8 @@ public class ProductService {
     List<Product> products = repository.list();
     List<ProductDTO> productsDTO = new ArrayList<>();
 
-    products.forEach((final Product product) -> productsDTO
-        .add(new ProductDTO(product.getCode(), product.getDescription())));
+    products.forEach(
+        (final Product product) -> productsDTO.add(ProductConverter.convertToDTO(product)));
 
     return productsDTO;
   }
@@ -44,7 +44,7 @@ public class ProductService {
   public ProductDTO getByKey(Integer id) {
     Product product = repository.getByKey(id);
     try {
-      return new ProductDTO(product.getCode(), product.getDescription());
+      return ProductConverter.convertToDTO(product);
       // Deberiamos tener nuestras propias clases que manejen las exceptions...
     } catch (NullPointerException e) {
       // logging...
