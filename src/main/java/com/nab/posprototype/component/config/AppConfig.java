@@ -6,10 +6,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages="com.nab.posprototype.component")
+@ComponentScan(basePackages = "com.nab.posprototype.component")
 public class AppConfig {
 
-	
-	
-	
+
+
 }

@@ -16,44 +16,41 @@ import com.nab.posprototype.model.Product;
 @Transactional
 public class ProductService {
 
-	@Autowired
-	@Qualifier("productRepositoryHbn")
-	ProductRepository repository;
+  @Autowired
+  @Qualifier("productRepositoryHbn")
+  ProductRepository repository;
 
-	public Integer add(ProductDTO productDTO) {
-		try {
-			Product productIn = repository.persist(new Product(productDTO.getCode(), productDTO.getDescription()));
-			return productIn.getId();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
-	}
+  public Integer add(ProductDTO productDTO) {
+    try {
+      Product productIn =
+          repository.persist(new Product(productDTO.getCode(), productDTO.getDescription()));
+      return productIn.getId();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return -1;
+    }
+  }
 
-	public List<ProductDTO> list() {
-		List<Product> products = repository.list();
-		List<ProductDTO> productsDTO = new ArrayList<>();
-		/*
-		 * for(int i=0;i<products.size();i++) { productsDTO.add(new
-		 * ProductDTO(products.get(i).getCode(),products.get(i).getDescription())); }
-		 */
-		// Prog. Funcional 
-		products.forEach((final Product product) -> productsDTO
-				.add(new ProductDTO(product.getCode(), product.getDescription())));
+  public List<ProductDTO> list() {
+    List<Product> products = repository.list();
+    List<ProductDTO> productsDTO = new ArrayList<>();
 
-		return productsDTO;
-	}
+    products.forEach((final Product product) -> productsDTO
+        .add(new ProductDTO(product.getCode(), product.getDescription())));
 
-	public ProductDTO getByKey(Integer id) {
-		Product product = repository.getByKey(id);
-		try {
-			return new ProductDTO(product.getCode(), product.getDescription());
-			// Deberiamos tener nuestras propias clases que manejen las exceptions...
-		} catch (NullPointerException e) {
-			// logging...
-			return null;
-		}
+    return productsDTO;
+  }
 
-	}
+  public ProductDTO getByKey(Integer id) {
+    Product product = repository.getByKey(id);
+    try {
+      return new ProductDTO(product.getCode(), product.getDescription());
+      // Deberiamos tener nuestras propias clases que manejen las exceptions...
+    } catch (NullPointerException e) {
+      // logging...
+      return null;
+    }
+
+  }
 
 }

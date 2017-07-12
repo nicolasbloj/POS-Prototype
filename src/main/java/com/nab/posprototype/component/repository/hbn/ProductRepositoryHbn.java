@@ -12,7 +12,9 @@ import com.nab.posprototype.model.Product;
  */
 @Repository("productRepositoryHbn")
 @Transactional
-public class ProductRepositoryHbn extends RepositoryHbn<Integer, Product> implements ProductRepository {
+public class ProductRepositoryHbn extends RepositoryHbn<Integer, Product>
+    implements ProductRepository {
+
 
 
 }
