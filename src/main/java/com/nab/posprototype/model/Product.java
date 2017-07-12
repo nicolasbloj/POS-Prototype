@@ -12,38 +12,39 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PRODUCTO")
-public class Product implements Serializable{
+public class Product implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-    @GeneratedValue(strategy = IDENTITY)
-	private Integer id;
-	@Column(name = "codigo")
-	private String code;
-	@Column(name = "descripcion")
-	private String description;
+  private static final long serialVersionUID = 1L;
 
-	public Product() {
-		super();
-	}
 
-	public Product(String code, String description) {
-		super();
-		this.code = code;
-		this.description = description;
-	}
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  private Integer id;
+  @Column(name = "codigo")
+  private String code;
+  @Column(name = "descripcion")
+  private String description;
 
-	public Integer getId() {
-		return id;
-	}
+  public Product() {
+    super();
+  }
 
-	public String getCode() {
-		return code;
-	}
+  public Product(String code, String description) {
+    super();
+    this.code = code;
+    this.description = description;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public Integer getId() {
+    return id;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public String getDescription() {
+    return description;
+  }
 
 }
