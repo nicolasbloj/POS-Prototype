@@ -22,6 +22,7 @@ public class ProductController {
   private Logger logger = Logger.getLogger(ProductController.class);
 
   @Autowired
+  // @Qualifier("productServiceImpl")
   ProductService service;
 
   @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json",
