@@ -10,9 +10,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.nab.posprototype.component.repository.Repository;
+import com.nab.posprototype.component.repository.operation.PersistenceRepository;
+import com.nab.posprototype.component.repository.operation.SearchRepository;
 
-public abstract class RepositoryHbn<PK extends Serializable, E> implements Repository<PK, E> {
+public abstract class RepositoryHbn<PK extends Serializable, E>
+    implements SearchRepository<PK, E>, PersistenceRepository<PK, E> {
 
   @Autowired
   private SessionFactory sessionFactory;
